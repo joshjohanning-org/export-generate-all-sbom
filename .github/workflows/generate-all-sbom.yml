@@ -10,7 +10,7 @@ jobs:
     - uses: actions/checkout@v3
     - uses: joshjohanning/generate-sbom-action@main
       with:
-        token: ${{ secrets.GITHUB_PAT }}
+        token: ${{ secrets.PAT }}
         org: ${{ github.repository_owner }}
     - uses: actions/upload-artifact@v3
       with:
