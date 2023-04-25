@@ -9,36 +9,36 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: joshjohanning/generate-sbom-action@joshjohanning/add-org-to-og
-      # with:
-      #   token: ${{ secrets.PAT }}
-      #   resource: ${{ github.repository }}
+      id: gensbom
     - uses: actions/upload-artifact@v3
       with:
-        name: sbom-repo
-        path: sbom-*.json
+        name: sbom
+        path: ${{ steps.gensbom.outputs.fileName }}
 
   gen-sbom-for-org:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - uses: joshjohanning/generate-sbom-action@joshjohanning/add-org-to-og
+      id: gensbom
       with:
         token: ${{ secrets.PAT }}
         resource: ${{ github.repository_owner }}
     - uses: actions/upload-artifact@v3
       with:
-        name: sbom-org
-        path: sbom-*.json
+        name: sbom
+        path: ${{ steps.gensbom.outputs.fileName }}
 
   gen-sbom-for-org-rate-limit:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - uses: joshjohanning/generate-sbom-action@joshjohanning/add-org-to-og
+      id: gensbom
       with:
         token: ''
         resource: octodemo
     - uses: actions/upload-artifact@v3
       with:
-        name: sbom-org-rate-limit
-        path: sbom-*.json
+        name: sbom
+        path: ${{ steps.gensbom.outputs.fileName }}
