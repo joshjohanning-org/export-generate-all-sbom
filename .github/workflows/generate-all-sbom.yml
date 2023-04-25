@@ -37,7 +37,7 @@ jobs:
     - uses: joshjohanning/generate-sbom-action@joshjohanning/add-org-to-og
       with:
         token: ''
-        resource: ${{ github.repository_owner }}
+        resource: octodemo
     - uses: actions/upload-artifact@v3
       with:
         name: sbom
