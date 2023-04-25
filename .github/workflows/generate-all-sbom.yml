@@ -14,7 +14,7 @@ jobs:
       #   resource: ${{ github.repository }}
     - uses: actions/upload-artifact@v3
       with:
-        name: sbom
+        name: sbom-repo
         path: sbom-*.json
 
   gen-sbom-for-org:
@@ -27,7 +27,7 @@ jobs:
         resource: ${{ github.repository_owner }}
     - uses: actions/upload-artifact@v3
       with:
-        name: sbom
+        name: sbom-org
         path: sbom-*.json
 
   gen-sbom-for-org-rate-limit:
@@ -40,5 +40,5 @@ jobs:
         resource: octodemo
     - uses: actions/upload-artifact@v3
       with:
-        name: sbom
+        name: sbom-org-rate-limit
         path: sbom-*.json
