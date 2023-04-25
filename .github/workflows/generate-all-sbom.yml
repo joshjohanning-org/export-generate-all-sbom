@@ -31,6 +31,7 @@ jobs:
 
   gen-sbom-for-org-rate-limit:
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
     - uses: actions/checkout@v3
     - uses: joshjohanning/generate-sbom-action@joshjohanning/add-org-to-og
