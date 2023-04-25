@@ -4,14 +4,40 @@ on:
   workflow_dispatch:
 
 jobs:
-  gen-sbom:
+  gen-sbom-for-repo:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - uses: joshjohanning/generate-sbom-action@main
+    - uses: joshjohanning/generate-sbom-action@joshjohanning/add-org-to-og
+      # with:
+      #   token: ${{ secrets.PAT }}
+      #   resource: ${{ github.repository }}
+    - uses: actions/upload-artifact@v3
+      with:
+        name: sbom
+        path: sbom-*.json
+
+  gen-sbom-for-org:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: joshjohanning/generate-sbom-action@joshjohanning/add-org-to-og
       with:
         token: ${{ secrets.PAT }}
-        org: ${{ github.repository_owner }}
+        resource: ${{ github.repository_owner }}
+    - uses: actions/upload-artifact@v3
+      with:
+        name: sbom
+        path: sbom-*.json
+
+  gen-sbom-for-org-rate-limit:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: joshjohanning/generate-sbom-action@joshjohanning/add-org-to-og
+      with:
+        token: ''
+        resource: ${{ github.repository_owner }}
     - uses: actions/upload-artifact@v3
       with:
         name: sbom
